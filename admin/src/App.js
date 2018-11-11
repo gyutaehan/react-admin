@@ -1,24 +1,28 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import Login from './components/Login';
+import Manage from './components/Manage';
 import './App.css';
 
 class App extends Component {
+    state = {
+        login : false,
+    };
+
+    getData = (val) =>{
+        if(val === "성공") {
+            this.setState({
+                login : true
+            });
+        }
+        alert(val);
+    };
+
   render() {
+        const cond = this.state.login;
     return (
       <div className="App">
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
+            {cond ? <Manage/> : <Login sendData={this.getData}/>}
         </header>
       </div>
     );
